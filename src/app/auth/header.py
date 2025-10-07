@@ -24,10 +24,27 @@ if settings.enable_header_auth:
             logger.info(
                 f"[AUTH] Header auth success: {email}, {exp}, {time_left} seconds left")
 
+            # Ensure headers stored in metadata are JSON-serializable
+            try:
+                headers_dict = dict(headers)
+            except Exception:
+                try:
+                    headers_dict = {k: v for k, v in headers.items()}
+                except Exception:
+                    raw = getattr(headers, "raw", None)
+                    if raw:
+                        headers_dict = {
+                            (k.decode() if isinstance(k, (bytes, bytearray)) else k):
+                            (v.decode() if isinstance(v, (bytes, bytearray)) else v)
+                            for k, v in raw
+                        }
+                    else:
+                        headers_dict = {}
+
             user = cl.User(
                 identifier=email,
                 metadata={"auth_type": "obo", "obo_token": token,
-                          "obo_token_expiry": exp.isoformat(), "headers": headers},
+                          "obo_token_expiry": exp.isoformat(), "headers": headers_dict},
                 display_name=email.split("@")[0],
                 email=email,
                 provider="obo"
