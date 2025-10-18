@@ -41,7 +41,9 @@ databricks bundle run --profile <PROFILE>
 **Key files to configure before deploying:**
 - `databricks.yml` — workspace host, app name, database instance name, MAS endpoint
 - `src/app/.chainlit/config.toml` — Chainlit settings, branding
-- `src/app/public/images/logo.svg` — your logo
+- `src/app/public/images/Little_Caesars_logo.svg` — your logo
+- `src/app/public/css/custom-branding.css` — custom styling and brand colors
+- `src/app/public/theme.json` — theme color definitions
 - `src/app/app.yaml` — app-specific names and environment variables (there's a known issue that variables can't be used in app.yaml from the bundle file)
 
 **Local Development:**
@@ -80,7 +82,8 @@ chainlit run app.py -w
 
 ## Minimal Setup Notes
 
-- **Chainlit config:** session timeouts, branding (`src/app/.chainlit/config.toml`, `public/logo.svg`)
+- **Chainlit config:** session timeouts, branding (`src/app/.chainlit/config.toml`, `public/images/Little_Caesars_logo.svg`)
+- **Custom Branding:** Colors and styling (`public/css/custom-branding.css`, `public/theme.json`)
 - **History budget (token-safe):** keep earliest system message + last N turns + a simple char budget; append current user message
 - **Lakebase:** SP → `generate_database_credential` → ephemeral DB password (cached + auto-refresh), injected via SQLAlchemy connect hook
 

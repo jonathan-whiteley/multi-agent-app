@@ -58,5 +58,3 @@ htmlcov/
 .coverage.*
 
 .chainlit/
-
-/public/
