@@ -63,6 +63,9 @@ enable_thread_management = true
 # Name of the assistant
 name = "Multi-Agent BI App"
 
+# Browser tab title
+app_title = "Multi-Agent BI App"
+
 # Sidebar configuration
 default_sidebar_state = "open"
 show_sidebar = true
