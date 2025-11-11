@@ -29,7 +29,7 @@ A Databricks App built with Chainlit that provides an intelligent chat interface
 **Deploy with Databricks Asset Bundles:**
 ```bash
 git clone <repo-url>
-cd bi-hub-app
+cd multi-agent-app
 # Update databricks.yml with your workspace/targets
 # Update src/app/.chainlit/config.toml for branding
 databricks bundle validate --profile <PROFILE>
