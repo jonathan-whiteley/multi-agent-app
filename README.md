@@ -32,6 +32,7 @@ git clone <repo-url>
 cd multi-agent-app
 # Update databricks.yml with your workspace/targets
 # Update src/app/.chainlit/config.toml for branding
+databricks auth login --host <workspace-url>
 databricks bundle validate --profile <PROFILE>
 databricks bundle deploy --profile <PROFILE>
 databricks bundle run --profile <PROFILE>
