@@ -22,3 +22,4 @@ env:
     
   # - name: SERVING_ENDPOINT
   #   valueFrom: ${var.model_endpoint_name}
+

@@ -1,5 +1,5 @@
 /* ======================================================
-   NOIRJET — Minimal, classy airline UI theme (black-first)
+   LITTLE CAESARS — Hot-N-Ready Pizza UI theme
    ====================================================== */
 
 /* Typeface */
@@ -10,28 +10,29 @@
    ======================================== */
 
 :root {
-  /* Core palette */
-  --nj-ink: #0b0b0d;          /* primary black */
-  --nj-ink-2: #111215;        /* elevated dark */
-  --nj-ink-3: #1a1c20;        /* hover dark */
-  --nj-text: #0a0a0a;         /* body text on light */
-  --nj-muted: #6b7280;        /* secondary text */
-  --nj-line: #e5e7eb;         /* borders on light */
-  --nj-line-dark: #1f2937;    /* borders on dark */
-  --nj-surface: #ffffff;      /* cards / content */
-  --nj-bg: #f8fafc;           /* app background */
-  --nj-focus: #60a5fa;        /* accessible focus ring (subtle blue) */
+  /* Little Caesars Core palette */
+  --lc-orange: #E7612A;        /* primary brand orange */
+  --lc-orange-2: #ff6000;      /* hover orange */
+  --lc-orange-3: #ff7733;      /* lighter orange accent */
+  --lc-dark: #2c1810;          /* dark brown */
+  --lc-text: #0a0a0a;          /* body text on light */
+  --lc-muted: #6b7280;         /* secondary text */
+  --lc-line: #e5e7eb;          /* borders on light */
+  --lc-line-dark: #3d2415;     /* borders on dark */
+  --lc-surface: #ffffff;       /* cards / content */
+  --lc-bg: #fff8f4;            /* warm app background */
+  --lc-focus: #E7612A;         /* focus ring - brand orange */
 
   /* Radii & shadows */
-  --nj-radius-sm: 8px;
-  --nj-radius-md: 12px;
-  --nj-radius-lg: 16px;
-  --nj-shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --nj-shadow-md: 0 6px 24px rgba(0,0,0,0.10);
-  --nj-shadow-lg: 0 12px 36px rgba(0,0,0,0.14);
+  --lc-radius-sm: 8px;
+  --lc-radius-md: 12px;
+  --lc-radius-lg: 16px;
+  --lc-shadow-sm: 0 2px 8px rgba(231,97,42,0.12);
+  --lc-shadow-md: 0 6px 24px rgba(231,97,42,0.20);
+  --lc-shadow-lg: 0 12px 36px rgba(231,97,42,0.25);
 
   /* Spacing */
-  --nj-gap: 16px;
+  --lc-gap: 16px;
 }
 
 /* ========================================
@@ -44,18 +45,18 @@
 }
 
 html, body {
-  background: var(--nj-bg);
-  color: var(--nj-text);
+  background: var(--lc-bg);
+  color: var(--lc-text);
 }
 
 /* ========================================
-   HEADER — discreet, premium bar
+   HEADER — Hot-N-Ready brand bar
    ======================================== */
 
 [data-testid="header"] {
-  background: linear-gradient(180deg, var(--nj-ink) 0%, var(--nj-ink-2) 100%) !important;
-  border-bottom: 1px solid var(--nj-line-dark) !important;
-  box-shadow: var(--nj-shadow-sm) !important;
+  background: linear-gradient(180deg, var(--lc-orange) 0%, var(--lc-orange-2) 100%) !important;
+  border-bottom: 3px solid var(--lc-dark) !important;
+  box-shadow: var(--lc-shadow-md) !important;
   height: 72px !important;
   display: flex !important;
   align-items: center !important;
@@ -65,35 +66,44 @@ html, body {
   overflow: hidden;
 }
 
-/* Brand wordmark (text fallback) */
+/* Brand wordmark (text fallback) - hidden when logo is present */
 [data-testid="header"]::before {
-  content: "NoirJet";
+  content: "🍕 LITTLE CAESARS";
   position: absolute;
   left: 24px;
   top: 50%;
   transform: translateY(-50%);
   color: #fff;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 800;
+  font-size: 22px;
   letter-spacing: 0.08em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Optional understated tagline */
+/* Hide text when logo is present */
+[data-testid="header"]:has(img)::before {
+  display: none;
+}
+
+/* Pizza! Pizza! tagline */
 [data-testid="header"]::after {
-  content: "Elevate. Simply.";
+  content: "PIZZA! PIZZA!™";
   position: absolute;
   right: 24px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255,255,255,0.72);
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 2px solid #fff;
+  background: var(--lc-dark);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
 }
 
 [data-testid="header"] > * {
@@ -101,70 +111,110 @@ html, body {
   color: #fff;
 }
 
+/* Logo sizing fix for Little Caesars logo */
+[data-testid="header"] img,
+[data-testid="header"] svg,
+[data-testid="header"] a img,
+[data-testid="header"] a svg {
+  max-height: 50px !important;
+  min-height: 40px !important;
+  height: 50px !important;
+  width: auto !important;
+  max-width: 200px !important;
+  object-fit: contain !important;
+  position: relative !important;
+  z-index: 10 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Logo link container */
+[data-testid="header"] a {
+  display: flex !important;
+  align-items: center !important;
+  height: 50px !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Logo container specific styling */
+.logo-container img,
+.logo-container svg,
+img[alt*="logo"],
+img[alt*="Logo"] {
+  max-height: 50px !important;
+  height: 50px !important;
+  width: auto !important;
+  min-width: 120px !important;
+}
+
 /* ========================================
-   SIDEBAR — dark, calm contrast
+   SIDEBAR — warm, inviting contrast
    ======================================== */
 
 [data-testid="sidebar"] {
-  background: linear-gradient(180deg, var(--nj-ink-2) 0%, var(--nj-ink) 100%) !important;
-  border-right: 1px solid var(--nj-line-dark) !important;
-  box-shadow: inset -1px 0 0 rgba(255,255,255,0.02) !important;
+  background: linear-gradient(180deg, var(--lc-dark) 0%, #1a0e08 100%) !important;
+  border-right: 2px solid var(--lc-orange) !important;
+  box-shadow: inset -2px 0 0 rgba(231,97,42,0.15) !important;
 }
 
 [data-testid="sidebar"] [data-testid="sidebar-header"] {
-  background: transparent !important;
+  background: var(--lc-orange) !important;
   color: #fff !important;
-  border-bottom: 1px solid var(--nj-line-dark) !important;
+  border-bottom: 2px solid var(--lc-dark) !important;
   padding: 20px !important;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
 [data-testid="sidebar"] [role="button"],
 [data-testid="sidebar"] button {
   background: transparent !important;
-  color: rgba(255,255,255,0.88) !important;
+  color: var(--lc-orange-3) !important;
   border: 1px solid transparent !important;
-  border-radius: var(--nj-radius-sm) !important;
+  border-radius: var(--lc-radius-sm) !important;
   margin: 6px 12px !important;
   padding: 10px 12px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   transition: background 150ms ease, color 150ms ease, transform 150ms ease !important;
 }
 
 [data-testid="sidebar"] [role="button"]:hover,
 [data-testid="sidebar"] button:hover {
-  background: var(--nj-ink-3) !important;
+  background: var(--lc-orange) !important;
   color: #fff !important;
-  border-color: rgba(255,255,255,0.08) !important;
+  border-color: var(--lc-orange-2) !important;
   transform: translateX(2px) !important;
+  box-shadow: 0 0 12px rgba(231,97,42,0.4) !important;
 }
 
 /* ========================================
-   MESSAGES — refined cards
+   MESSAGES — Hot-N-Ready cards
    ======================================== */
 
 [data-testid="message"] {
-  border-radius: var(--nj-radius-md) !important;
-  border: 1px solid var(--nj-line) !important;
+  border-radius: var(--lc-radius-md) !important;
+  border: 2px solid var(--lc-line) !important;
   margin: 16px 0 !important;
   padding: 18px 18px !important;
-  background: var(--nj-surface) !important;
-  box-shadow: var(--nj-shadow-sm) !important;
+  background: var(--lc-surface) !important;
+  box-shadow: var(--lc-shadow-sm) !important;
   transition: box-shadow 200ms ease, transform 200ms ease !important;
 }
 
 [data-testid="message"]:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: var(--nj-shadow-md) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--lc-shadow-md) !important;
+  border-color: var(--lc-orange-3) !important;
 }
 
-/* User bubble: near-black with white text */
+/* User bubble: Little Caesars orange with white text */
 [data-testid="message"][data-testid="user-message"] {
-  background: var(--nj-ink) !important;
+  background: linear-gradient(135deg, var(--lc-orange) 0%, var(--lc-orange-2) 100%) !important;
   color: #ffffff !important;
-  border: 1px solid var(--nj-line-dark) !important;
+  border: 2px solid var(--lc-dark) !important;
   margin-left: 40px !important;
 }
 
@@ -172,19 +222,19 @@ html, body {
   color: #ffffff !important;
 }
 
-/* Assistant bubble: white card with left accent bar */
+/* Assistant bubble: white card with orange accent bar */
 [data-testid="message"][data-testid="assistant-message"] {
-  background: var(--nj-surface) !important;
-  color: var(--nj-text) !important;
-  border-color: var(--nj-line) !important;
+  background: var(--lc-surface) !important;
+  color: var(--lc-text) !important;
+  border-color: var(--lc-orange) !important;
   margin-right: 40px !important;
-  border-left: 4px solid var(--nj-ink) !important;
+  border-left: 5px solid var(--lc-orange) !important;
 }
 
 /* Message author */
 [data-testid="message"] [data-testid="message-author"] {
   font-weight: 700 !important;
-  color: var(--nj-ink) !important;
+  color: var(--lc-orange) !important;
   margin-bottom: 8px !important;
   letter-spacing: 0.02em !important;
 }
@@ -192,8 +242,8 @@ html, body {
 /* Code blocks inside messages */
 [data-testid="message"] pre,
 [data-testid="message"] code {
-  background: #0f172a0d !important; /* subtle slate tint */
-  border: 1px solid var(--nj-line) !important;
+  background: #fff5ed !important; /* warm code background */
+  border: 1px solid var(--lc-orange-3) !important;
   border-radius: 10px !important;
   padding: 0.6em 0.8em !important;
 }
@@ -203,13 +253,19 @@ html, body {
   width: 100%;
   border-collapse: separate !important;
   border-spacing: 0 !important;
-  border: 1px solid var(--nj-line) !important;
+  border: 2px solid var(--lc-orange) !important;
   border-radius: 10px !important;
   overflow: hidden !important;
 }
-[data-testid="message"] th,
+[data-testid="message"] th {
+  background: var(--lc-orange) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--lc-dark) !important;
+  padding: 12px 12px !important;
+}
 [data-testid="message"] td {
-  border-bottom: 1px solid var(--nj-line) !important;
+  border-bottom: 1px solid var(--lc-line) !important;
   padding: 10px 12px !important;
 }
 [data-testid="message"] tr:last-child td {
@@ -217,14 +273,14 @@ html, body {
 }
 
 /* ========================================
-   INPUT — quiet elegance
+   INPUT — ready to order
    ======================================== */
 
 [data-testid="input-container"] {
-  background: var(--nj-surface) !important;
-  border: 1px solid var(--nj-line) !important;
-  border-radius: var(--nj-radius-lg) !important;
-  box-shadow: var(--nj-shadow-sm) !important;
+  background: var(--lc-surface) !important;
+  border: 2px solid var(--lc-orange) !important;
+  border-radius: var(--lc-radius-lg) !important;
+  box-shadow: var(--lc-shadow-md) !important;
   margin: 20px !important;
   padding: 6px !important;
   display: flex;
@@ -234,7 +290,7 @@ html, body {
 [data-testid="input-container"] input,
 [data-testid="input-container"] textarea {
   background: transparent !important;
-  color: var(--nj-text) !important;
+  color: var(--lc-text) !important;
   border: none !important;
   font-size: 16px !important;
   font-weight: 500 !important;
@@ -245,88 +301,96 @@ html, body {
 
 [data-testid="input-container"] input::placeholder,
 [data-testid="input-container"] textarea::placeholder {
-  color: var(--nj-muted) !important;
+  color: var(--lc-muted) !important;
   opacity: 1 !important;
 }
 
 [data-testid="input-container"] input:focus,
 [data-testid="input-container"] textarea:focus {
-  box-shadow: inset 0 0 0 2px var(--nj-focus) !important;
+  box-shadow: inset 0 0 0 3px var(--lc-orange-3) !important;
   border-radius: 10px !important;
 }
 
-/* Send button */
+/* Send button - Hot-N-Ready style */
 [data-testid="input-container"] button {
-  background: var(--nj-ink) !important;
+  background: linear-gradient(135deg, var(--lc-orange) 0%, var(--lc-orange-2) 100%) !important;
   color: #ffffff !important;
-  border: 1px solid var(--nj-ink) !important;
+  border: 2px solid var(--lc-dark) !important;
   border-radius: 10px !important;
-  padding: 12px 18px !important;
-  font-weight: 600 !important;
+  padding: 12px 20px !important;
+  font-weight: 700 !important;
   font-size: 15px !important;
   cursor: pointer !important;
-  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: transform 150ms ease, box-shadow 150ms ease !important;
 }
 
 [data-testid="input-container"] button:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: var(--nj-shadow-md) !important;
-  background: #000 !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: var(--lc-shadow-lg) !important;
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid var(--nj-focus) !important;
+  outline: 3px solid var(--lc-orange) !important;
   outline-offset: 2px !important;
   border-radius: 6px;
 }
 
 /* ========================================
-   UTILITIES (NoirJet)
+   UTILITIES (Little Caesars)
    ======================================== */
 
-.nj-badge {
-  background: var(--nj-ink);
+.lc-badge {
+  background: var(--lc-orange);
   color: #fff;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 12px;
-  letter-spacing: 0.06em;
-  border: 1px solid var(--nj-line-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid var(--lc-dark);
+  box-shadow: 0 2px 4px rgba(231,97,42,0.3);
 }
 
-.nj-alert {
-  background: #111827;
+.lc-alert {
+  background: var(--lc-orange);
   color: #fff;
-  border: 1px solid var(--nj-line-dark);
+  border: 2px solid var(--lc-dark);
   border-radius: 12px;
   padding: 14px 16px;
   margin: 14px 0;
-  font-weight: 500;
-  box-shadow: var(--nj-shadow-sm);
+  font-weight: 600;
+  box-shadow: var(--lc-shadow-md);
 }
 
-.nj-highlight {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  color: var(--nj-text);
+.lc-highlight {
+  background: linear-gradient(135deg, #fff5ed 0%, #ffebe0 100%);
+  color: var(--lc-text);
   padding: 18px;
   border-radius: 12px;
-  border: 1px solid var(--nj-line);
-  box-shadow: var(--nj-shadow-sm);
+  border: 2px solid var(--lc-orange-3);
+  box-shadow: var(--lc-shadow-sm);
 }
 
 /* ========================================
-   ANIMATIONS — subtle, restrained
+   ANIMATIONS — Hot-N-Ready
    ======================================== */
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pizzaPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(231,97,42,0.3); }
+  50% { box-shadow: 0 0 16px rgba(231,97,42,0.6); }
+}
+
 [data-testid="message"] {
-  animation: fadeInUp 180ms ease;
+  animation: fadeInUp 200ms ease;
 }
 
 /* ========================================
@@ -334,11 +398,144 @@ html, body {
    ======================================== */
 
 @media (max-width: 768px) {
-  [data-testid="header"]::before { font-size: 18px; left: 16px; }
+  [data-testid="header"]::before { 
+    font-size: 18px; 
+    left: 16px; 
+    content: "🍕 LC";
+  }
   [data-testid="header"]::after { display: none; } /* reduce clutter on small screens */
 
   [data-testid="message"] {
     margin-left: 16px !important;
     margin-right: 16px !important;
   }
+  
+  [data-testid="input-container"] {
+    margin: 12px !important;
+  }
+}
+
+/* ========================================
+   LOGIN PAGE - Little Caesars Logo
+   ======================================== */
+
+/* Style the login page logo/image */
+[data-testid="login-page"] img,
+[data-testid="auth-page"] img,
+.login-page img,
+.auth-page img,
+img[src*="Little_Caesars_logo"] {
+  max-width: 400px !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 30px auto !important;
+  filter: drop-shadow(0 4px 12px rgba(231,97,42,0.3)) !important;
+}
+
+/* Login page container styling */
+[data-testid="login-page"],
+[data-testid="auth-page"],
+.login-page,
+.auth-page {
+  background: var(--lc-bg) !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Login form container */
+[data-testid="login-form"],
+.login-form {
+  background: var(--lc-surface) !important;
+  padding: 40px !important;
+  border-radius: var(--lc-radius-lg) !important;
+  box-shadow: var(--lc-shadow-lg) !important;
+  border: 2px solid var(--lc-orange) !important;
+  max-width: 500px !important;
+  width: 100% !important;
+}
+
+/* Mobile adjustments for login page */
+@media (max-width: 768px) {
+  [data-testid="login-page"] img,
+  [data-testid="auth-page"] img,
+  .login-page img,
+  .auth-page img,
+  img[src*="Little_Caesars_logo"] {
+    max-width: 280px !important;
+    margin: 0 auto 20px auto !important;
+  }
+  
+  [data-testid="login-form"],
+  .login-form {
+    padding: 30px 20px !important;
+    margin: 20px !important;
+  }
+}
+
+/* ========================================
+   ENSURE SVG IMAGES ARE VISIBLE
+   ======================================== */
+
+/* General SVG visibility and sizing */
+img[src$=".svg"],
+img[src*=".svg"],
+svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Target Chainlit's dynamically generated logo */
+img.logo,
+img[alt="logo"],
+img[src*="/logo"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 400px !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto 30px auto !important;
+  filter: drop-shadow(0 4px 12px rgba(231,97,42,0.3)) !important;
+}
+
+/* Ensure Little Caesars logo is always visible */
+img[src*="Little_Caesars_logo.svg"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Welcome screen logo styling */
+#welcome-screen img.logo,
+#welcome-screen img[alt="logo"],
+div[id*="welcome"] img.logo,
+div[id*="welcome"] img[alt="logo"],
+main img.logo,
+main img[alt="logo"],
+main img[alt="Assistant"],
+[class*="MuiBox"] img.logo,
+[class*="MuiBox"] img[alt="logo"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 300px !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto 30px auto !important;
+  filter: drop-shadow(0 4px 12px rgba(231,97,42,0.3)) !important;
+}
+
+/* Override any tailwind classes that might be hiding the logo */
+.w-\[200px\] {
+  width: 400px !important;
+}
+
+.mb-2 {
+  margin-bottom: 30px !important;
 }
