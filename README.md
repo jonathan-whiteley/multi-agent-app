@@ -31,7 +31,6 @@ A Databricks App built with Chainlit that provides an intelligent chat interface
 git clone <repo-url>
 cd bi-hub-app
 # Update databricks.yml with your workspace/targets
-# Update src/app/app.yaml with proper database and endpoint names
 # Update src/app/.chainlit/config.toml for branding
 databricks bundle validate --profile <PROFILE>
 databricks bundle deploy --profile <PROFILE>
